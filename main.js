@@ -31,7 +31,7 @@ const obtenerProductosHome = async () => {
             let pString = JSON.stringify(p).replace(/'/g,"\\'").replace(/"/g,'&quot;')
             productos_html += `
             <div class="card d-flex align-center p-2 m-4 shadow" style="width: 300px;">
-                <img class="card-img-top m-1 shadow" src="${p.image}" alt="${p.title}" style="width: 250px; height:150px; />
+                <img class="card-img-top m-1 shadow" src="" alt="${p.title}" style="width: 250px; height:150px; />
                 <div class="card-body">
                     <h4 class="card-title">${p.title}</h4>
                     <p class="card-text">$${p.price}</p>
@@ -61,7 +61,7 @@ const obtenerProductosCategoria = async (c) => {
             let pString = JSON.stringify(p).replace(/'/g,"\\'").replace(/"/g,'&quot;')
             productos_html += `
             <div class="card d-flex align-center p-2 m-4 shadow" style="width: 300px;">
-                <img class="card-img-top m-1 shadow" src="${p.image}" alt="${p.title}" style="width: 250px; height:150px; />
+                <img class="card-img-top m-1 shadow" src="" alt="${p.title}" style="width: 150px; height:auto;" />
                 <div class="card-body">
                     <h4 class="card-title">${p.title}</h4>
                     <p class="card-text">$${p.price}</p>
@@ -84,7 +84,7 @@ const verProducto = async (p) => {
     <div class="row container justify-content-around mt-5">
     <a onclick="obtenerProductosHome()" class="cursor-pointer">VOLVER A HOME</a>
     <div class="col-7 border text-center">
-        <img class="text-center my-5" src="${p.image}" style="width: 50%; height: auto;" alt="${p.title}"/>
+        <img class="text-center my-5" src="" style="width: 50%; height: auto;" alt="${p.title}"/>
     </div>
     <div class="col-4 border text-center">
         <h1>${p.title}</h1>
@@ -102,7 +102,21 @@ const verProducto = async (p) => {
     
 }
 
+const agregarCarrito = async (p) =>{
+    let carrito = JSON.parse(localStorage.getItem('carrito'))
+    carrito.push(p)
+    console.log(carrito)
+    localStorage.setItem('carrito',JSON.stringify(carrito))
+}
+
 const main = async () => {
+    let carritostorage = localStorage.getItem('carrito')
+    if( carritostorage ){
+        let carrito = JSON.parse(carritostorage)
+    } else {
+        let carrito = []
+        localStorage.setItem('carrito',JSON.stringify(carrito))
+    }
     await obtenerCategorias()
     console.log('categorías agregadas')
     await obtenerProductosHome()
