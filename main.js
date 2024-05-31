@@ -107,7 +107,7 @@ const agregarCarrito = async (p) => {
     let carrito = JSON.parse(localStorage.getItem('carrito'))
     carrito.push(p)
     const div_producto = document.getElementById("msg" + p.title)
-    div_producto.innerHTML.includes("carrito.") ? "" : div_producto.innerHTML += '<p class="text-center" >Producto agregado al <a href="/cart.html">carrito</a>. :) </p>'
+    div_producto.innerHTML.includes("carrito.") ? "" : div_producto.innerHTML += '<p class="text-center" >Producto agregado al <a href="./cart.html">carrito</a>. :) </p>'
 
     localStorage.setItem('carrito', JSON.stringify(carrito))
 }
